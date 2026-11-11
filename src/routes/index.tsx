@@ -1,23 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
+import App from "@/App";
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const TITULO = "Café La Esquina · Tu rincón favorito del barrio";
+const DESCRIPCION =
+  "Café La Esquina: cafetería de barrio con café de calidad, desayunos y dulces recién preparados en un ambiente acogedor. Proyecto de demostración.";
+const OG_DESCRIPCION = "Café de calidad, desayunos y dulces recién preparados en un ambiente acogedor.";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: TITULO },
+      { name: "description", content: DESCRIPCION },
+      { property: "og:title", content: TITULO },
+      { property: "og:description", content: OG_DESCRIPCION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: App,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}

@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- The landing page lives in `src/App.tsx` (sections in `src/components/`) and is rendered by `src/routes/index.tsx`; why: the user supplied this structure verbatim and wants it kept as given.
+- Theme tokens, `container` and the `.btn-*`/`.titulo-seccion`/`.etiqueta` classes live in `src/styles.css` (Tailwind v4 `@theme`/`@utility`/`@layer components`); why: there is no Tailwind config file on this stack.
