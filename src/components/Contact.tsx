@@ -48,13 +48,25 @@ export default function Contact() {
     try {
       // FormData (multipart) = petición CORS "simple": el navegador no lanza preflight OPTIONS,
       // que Web3Forms rechaza. No añadir Content-Type manualmente.
+      // Personalización del correo (plan gratuito de Web3Forms): asunto, remitente,
+      // responder-a y etiquetas de campo en español. El texto de introducción es Pro.
+      const nombre = campos.nombre.trim();
+      const email = campos.email.trim();
+      const fecha = new Intl.DateTimeFormat("es-ES", {
+        dateStyle: "full",
+        timeStyle: "short",
+        timeZone: "Europe/Madrid",
+      }).format(new Date());
       const datos = new FormData();
       datos.append("access_key", WEB3FORMS_ACCESS_KEY);
-      datos.append("subject", "Nuevo mensaje desde la web de Café La Esquina");
-      datos.append("from_name", "Web Café La Esquina");
-      datos.append("name", campos.nombre.trim());
-      datos.append("email", campos.email.trim());
-      datos.append("message", campos.mensaje.trim());
+      datos.append("subject", `☕ Café La Esquina · Nuevo mensaje de ${nombre}`);
+      datos.append("from_name", "Café La Esquina");
+      datos.append("replyto", email); // «Responder» en el correo contesta directamente al cliente
+      datos.append("Nombre", nombre);
+      datos.append("Correo", email); // nombres de campo sin tildes: Web3Forms los corrompe
+      datos.append("Mensaje", campos.mensaje.trim());
+      datos.append("Recibido", fecha);
+      datos.append("Origen", "Formulario de contacto de la web de Café La Esquina");
       if (botcheck) datos.append("botcheck", "true");
       const res = await fetch(WEB3FORMS_ENDPOINT, {
         method: "POST",
