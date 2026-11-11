@@ -143,13 +143,85 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+/* Café La Esquina theme tokens */
+@theme {
+  --color-crema: #f7f1e6;
+  --color-crema-oscuro: #efe5d3;
+  --color-cafe: #5b3a29;
+  --color-cafe-claro: #8a5a3c;
+  --color-cafe-oscuro: #3b2418;
+  --color-oliva: #5e6b3a;
+  --color-oliva-claro: #7c8a4e;
+  --color-oliva-oscuro: #46512a;
+  --color-tinta: #2b1d14;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+/* Container: centered, 1rem padding, full width until 1200px (Tailwind v3 config equivalent) */
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  max-width: none;
+  @media (width >= 40rem) {
+    max-width: none;
+  }
+  @media (width >= 48rem) {
+    max-width: none;
+  }
+  @media (width >= 64rem) {
+    max-width: none;
+  }
+  @media (width >= 75rem) {
+    max-width: 1200px;
+  }
+  @media (width >= 80rem) {
+    max-width: 1200px;
+  }
+  @media (width >= 96rem) {
+    max-width: 1200px;
+  }
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    @apply bg-crema font-sans text-tinta antialiased;
+  }
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-oliva ring-offset-2 ring-offset-crema;
+  }
+}
+
+@layer components {
+  .btn-primario {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+    @apply bg-cafe text-crema hover:bg-cafe-oscuro;
+  }
+  .btn-secundario {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60;
+    @apply border-2 border-cafe text-cafe hover:bg-cafe hover:text-crema;
+  }
+  .titulo-seccion {
+    @apply font-serif text-3xl font-bold text-cafe-oscuro sm:text-4xl;
+  }
+  .etiqueta {
+    @apply text-sm font-semibold uppercase tracking-widest text-oliva;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
