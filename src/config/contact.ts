@@ -8,7 +8,7 @@
  * autorizado que deba recibir los mensajes y pégala aquí.
  */
 export const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
-export const WEB3FORMS_ACCESS_KEY = "PENDIENTE_CONFIGURAR";
+export const WEB3FORMS_ACCESS_KEY = "ca01aa44-160f-4ae8-99ba-e127fc0012e7";
 
 export const isContactConfigured = () =>
   /^[0-9a-f-]{36}$/i.test(WEB3FORMS_ACCESS_KEY);
